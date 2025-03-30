@@ -1,0 +1,12 @@
+{
+  "name": "fastify-route-printer",
+  "version": "0.0.0",
+  "description": "Fastify route printer",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Waddah-JD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Waddah-JD/fastify-route-printer"
+  }
+}
