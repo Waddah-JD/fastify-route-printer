@@ -8,5 +8,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Waddah-JD/fastify-route-printer"
+  },
+  "scripts": {
+    "build:prod": "echo build:prod ..",
+    "publish:patch": "./bin/publish.sh patch",
+    "publish:minor": "./bin/publish.sh minor",
+    "publish:major": "./bin/publish.sh major"
   }
 }
