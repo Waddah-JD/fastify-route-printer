@@ -11,6 +11,9 @@
   },
   "scripts": {
     "clear:dist": "rm -rf dist",
+    "lint": "eslint",
+    "lint:fix": "npm run lint -- --fix",
+    "format:fix": "prettier --write .",
     "build:dev": "npm run clear:dist && tsc",
     "build:dev:watch": "npm run build:dev -- --watch",
     "build:prod": "npm run clear:dist && tsc --project tsconfig.prod.json",
@@ -24,6 +27,12 @@
     "routes"
   ],
   "devDependencies": {
-    "typescript": "^5.8.2"
+    "eslint": "^9.23.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
   }
 }
