@@ -10,9 +10,20 @@
     "url": "https://github.com/Waddah-JD/fastify-route-printer"
   },
   "scripts": {
-    "build:prod": "echo build:prod ..",
+    "clear:dist": "rm -rf dist",
+    "build:dev": "npm run clear:dist && tsc",
+    "build:dev:watch": "npm run build:dev -- --watch",
+    "build:prod": "npm run clear:dist && tsc --project tsconfig.prod.json",
+    "build:prod:watch": "npm run build:prod -- --watch",
     "publish:patch": "./bin/publish.sh patch",
     "publish:minor": "./bin/publish.sh minor",
     "publish:major": "./bin/publish.sh major"
+  },
+  "keywords": [
+    "fastify",
+    "routes"
+  ],
+  "devDependencies": {
+    "typescript": "^5.8.2"
   }
 }

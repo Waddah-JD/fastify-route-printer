@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "allowJs": false,
+    "sourceMap": false,
+    "declaration": false,
+    "target": "ES2020",
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "jsx": "react-jsx",
+    "skipLibCheck": true
+  }
+}
