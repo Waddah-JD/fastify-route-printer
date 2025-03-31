@@ -6,3 +6,4 @@ src
 eslint.config.mjs
 prettier.config.mjs
 tsconfig.*
+TODO.md
