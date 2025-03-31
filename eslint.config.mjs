@@ -5,6 +5,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import { defineConfig } from "eslint/config";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
@@ -17,11 +18,17 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
+export default defineConfig([
   {
     ignores: ["dist"],
   },
-  ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"),
+  ...compat.extends(
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+  ),
   {
     plugins: {
       "@typescript-eslint": typescriptEslint,
@@ -29,6 +36,13 @@ export default [
       "unused-imports": unusedImports,
     },
     languageOptions: { globals: { ...globals.node }, parser: tsParser, ecmaVersion: "latest", sourceType: "module" },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+    },
     rules: {
       "@typescript-eslint/naming-convention": ["warn", { selector: "import", format: ["camelCase", "PascalCase"] }],
       eqeqeq: "warn",
@@ -48,6 +62,7 @@ export default [
           ],
         },
       ],
+      "import/extensions": ["error", "ignorePackages", { js: "always", ts: "never" }],
     },
   },
-];
+]);

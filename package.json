@@ -2,7 +2,9 @@
   "name": "fastify-route-printer",
   "version": "0.0.1",
   "description": "Fastify route printer",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "Waddah-JD",
   "repository": {
@@ -27,12 +29,24 @@
     "routes"
   ],
   "devDependencies": {
+    "@types/node": "^22.13.14",
     "eslint": "^9.23.0",
+    "eslint-import-resolver-typescript": "^4.3.1",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.28.0"
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "fastify": "^5.0.0",
+    "fastify-plugin": "^5.0.0"
+  },
+  "peerDependencies": {
+    "fastify": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
