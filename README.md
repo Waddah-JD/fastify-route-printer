@@ -15,3 +15,11 @@ const app = Fastify();
 const opts: FastifyRoutePrinterPluginOptions = { includeHEAD: true };
 await app.register(routePrinter, opts);
 ```
+
+## Documentation
+
+### FastifyRoutePrinterPluginOptions
+
+| Property    | Type    | Required | Default |
+| ----------- | ------- | -------- | ------- |
+| includeHEAD | boolean | false    | false   |
