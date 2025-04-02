@@ -7,12 +7,26 @@
 
 ## Examples
 
+### Default Options
+
 ```ts
 import routePrinter, { FastifyRoutePrinterPluginOptions } from "fastify-route-printer";
 
 const app = Fastify();
 
-const opts: FastifyRoutePrinterPluginOptions = { includeHEAD: true };
+await app.register(routePrinter);
+```
+
+### Custom Options
+
+```ts
+import routePrinter, { FastifyRoutePrinterPluginOptions } from "fastify-route-printer";
+
+const app = Fastify();
+
+const opts: FastifyRoutePrinterPluginOptions = {
+  // check Documentation below for a full list of available properties
+};
 await app.register(routePrinter, opts);
 ```
 
@@ -20,6 +34,7 @@ await app.register(routePrinter, opts);
 
 ### FastifyRoutePrinterPluginOptions
 
-| Property    | Type    | Required | Default |
-| ----------- | ------- | -------- | ------- |
-| includeHEAD | boolean | false    | false   |
+| Property    | Type                           | Required | Default                             | Description |
+| ----------- | ------------------------------ | -------- | ----------------------------------- | ----------- |
+| includeHEAD | boolean                        | false    | false                               |             |
+| sortRoutes  | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) |             |

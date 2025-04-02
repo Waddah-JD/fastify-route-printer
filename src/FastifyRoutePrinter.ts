@@ -5,6 +5,7 @@ import { Config, FastifyRoutePrinterPluginOptions, Printer, Route } from "./type
 class FastifyRoutePrinter {
   private static DEFAULT_CONFIG: Config = {
     includeHEAD: false,
+    sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
   };
   private readonly config: Config;
 
@@ -19,10 +20,10 @@ class FastifyRoutePrinter {
   private static getConfig(pluginOptions: FastifyRoutePrinterPluginOptions): Config {
     return {
       includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
+      sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
     };
   }
 
-  // TODO add pluggable filter and pluggable sort
   private getRoutesFromRouteOptions(): Route[] {
     const routes: Route[] = [];
 
@@ -33,10 +34,15 @@ class FastifyRoutePrinter {
       }
     });
 
-    return routes.filter((it) => {
-      if (this.config.includeHEAD) return true;
-      return it.method !== "head" && it.method !== "HEAD";
-    });
+    const headFiltered = this.config.includeHEAD
+      ? routes
+      : routes.filter((it) => it.method !== "head" && it.method !== "HEAD");
+
+    // TODO add pluggable filter
+
+    const sorted = headFiltered.sort(this.config.sortRoutes);
+
+    return sorted;
   }
 
   async print(): Promise<void> {
