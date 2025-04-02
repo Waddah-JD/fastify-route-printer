@@ -1,21 +1,24 @@
 import { HTTPMethods, RouteOptions } from "fastify";
 
-import { Config, PluginOptions, Printer, Route } from "./types.js";
+import { Config, FastifyRoutePrinterPluginOptions, Printer, Route } from "./types.js";
 
 class FastifyRoutePrinter {
+  private static DEFAULT_CONFIG: Config = {
+    includeHEAD: false,
+  };
   private readonly config: Config;
 
   constructor(
     private readonly routeOptions: RouteOptions[],
     private readonly printer: Printer,
-    pluginOptions: PluginOptions,
+    pluginOptions: FastifyRoutePrinterPluginOptions,
   ) {
     this.config = FastifyRoutePrinter.getConfig(pluginOptions);
   }
 
-  private static getConfig(pluginOptions: PluginOptions): Config {
+  private static getConfig(pluginOptions: FastifyRoutePrinterPluginOptions): Config {
     return {
-      includeHEAD: pluginOptions.includeHEAD || false,
+      includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
     };
   }
 

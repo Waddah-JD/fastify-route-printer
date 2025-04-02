@@ -1,10 +1,10 @@
 import { HTTPMethods } from "fastify";
 
-export type PluginOptions = {
+export type FastifyRoutePrinterPluginOptions = {
   includeHEAD?: boolean;
 };
 
-export type Config = Required<PluginOptions>;
+export type Config = Required<FastifyRoutePrinterPluginOptions>;
 
 export type Route = {
   url: string;
