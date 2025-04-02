@@ -21,17 +21,19 @@ class FastifyRoutePrinter {
 
   // TODO add pluggable filter and pluggable sort
   private getRoutesFromRouteOptions(): Route[] {
-    const routes: Route[] = this.routeOptions
-      .map((it) => {
-        const methods: HTTPMethods[] = Array.isArray(it.method) ? it.method : [it.method];
-        return { methods, url: it.url };
-      })
-      .filter((it) => {
-        if (this.config.includeHEAD) return true;
-        if (it.methods.length === 1 && (it.methods[0] === "head" || it.methods[0] === "HEAD")) return false;
-        return true;
-      });
-    return routes;
+    const routes: Route[] = [];
+
+    this.routeOptions.forEach((it) => {
+      const methods: HTTPMethods[] = Array.isArray(it.method) ? it.method : [it.method];
+      for (const method of methods) {
+        routes.push({ method, url: it.url });
+      }
+    });
+
+    return routes.filter((it) => {
+      if (this.config.includeHEAD) return true;
+      return it.method !== "head" && it.method !== "HEAD";
+    });
   }
 
   async print(): Promise<void> {

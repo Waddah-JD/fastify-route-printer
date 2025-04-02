@@ -8,7 +8,7 @@ export type Config = Required<PluginOptions>;
 
 export type Route = {
   url: string;
-  methods: HTTPMethods[];
+  method: HTTPMethods;
 };
 
 export interface Printer {

@@ -14,7 +14,7 @@ class TablePrinter implements Printer {
     const PADDING = 2;
 
     for (const r of routes) {
-      longestMethod = Math.max(r.methods.join(", ").length, longestMethod);
+      longestMethod = Math.max(r.method.length, longestMethod);
       longestUrl = Math.max(r.url.length, longestUrl);
     }
 
@@ -27,7 +27,7 @@ class TablePrinter implements Printer {
     lines.push(`| ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}|`);
     lines.push(layoutLine);
     for (const route of routes) {
-      lines.push(`| ${route.methods.join(", ").padEnd(methodColLength - 1)}| ${route.url.padEnd(urlColLength - 1)}|`);
+      lines.push(`| ${route.method.padEnd(methodColLength - 1)}| ${route.url.padEnd(urlColLength - 1)}|`);
     }
     lines.push(layoutLine);
 
