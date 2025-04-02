@@ -2,8 +2,8 @@
 
 ## Features
 
-• Fastify route logger
-• Extensible, write your own custom `Printer` instead of using one of the printers exported by this module
+- Fastify route logger
+- Extensible, write your own custom `Printer` instead of using one of the printers exported by this module
 
 ## Examples
 
