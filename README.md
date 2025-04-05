@@ -7,7 +7,7 @@
 
 ## Examples
 
-### Default Options
+### With Default Options
 
 ```ts
 import routePrinter, { FastifyRoutePrinterPluginOptions } from "fastify-route-printer";
@@ -17,7 +17,7 @@ const app = Fastify();
 await app.register(routePrinter);
 ```
 
-### Custom Options
+### With Custom Options
 
 ```ts
 import routePrinter, { FastifyRoutePrinterPluginOptions } from "fastify-route-printer";
@@ -34,7 +34,8 @@ await app.register(routePrinter, opts);
 
 ### FastifyRoutePrinterPluginOptions
 
-| Property    | Type                           | Required | Default                             | Description                             |
-| ----------- | ------------------------------ | -------- | ----------------------------------- | --------------------------------------- |
-| includeHEAD | boolean                        | false    | false                               |                                         |
-| sortRoutes  | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) | by default, sorts routes alphabetically |
+| Property    | Type                           | Required | Default                             | Description                                                                  |
+| ----------- | ------------------------------ | -------- | ----------------------------------- | ---------------------------------------------------------------------------- |
+| disabled    | boolean                        | false    | false                               | opt-in disable the plugin on certain conditions, for example `NODE_ENV=prod` |
+| includeHEAD | boolean                        | false    | false                               |                                                                              |
+| sortRoutes  | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) | by default, sorts routes alphabetically                                      |

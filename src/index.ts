@@ -7,6 +7,8 @@ import { Config, FastifyRoutePrinterPluginOptions, Printer, Route } from "./type
 
 // eslint-disable-next-line func-style
 const fastifyRoutePrinter: FastifyPluginAsync<FastifyRoutePrinterPluginOptions> = async function (instance, options) {
+  if (options.disabled) return;
+
   const routeOptions: RouteOptions[] = [];
 
   instance.addHook("onRoute", (route) => {

@@ -1,6 +1,7 @@
 import { HTTPMethods } from "fastify";
 
 export type FastifyRoutePrinterPluginOptions = {
+  disabled?: boolean;
   includeHEAD?: boolean;
   sortRoutes?: (a: Route, b: Route) => number;
 };

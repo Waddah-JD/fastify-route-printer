@@ -4,6 +4,7 @@ import { Config, FastifyRoutePrinterPluginOptions, Printer, Route } from "./type
 
 class FastifyRoutePrinter {
   private static DEFAULT_CONFIG: Config = {
+    disabled: false,
     includeHEAD: false,
     sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
   };
@@ -19,6 +20,7 @@ class FastifyRoutePrinter {
 
   private static getConfig(pluginOptions: FastifyRoutePrinterPluginOptions): Config {
     return {
+      disabled: pluginOptions.disabled || FastifyRoutePrinter.DEFAULT_CONFIG.disabled,
       includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
       sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
     };
