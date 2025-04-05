@@ -34,7 +34,7 @@ await app.register(routePrinter, opts);
 
 ### FastifyRoutePrinterPluginOptions
 
-| Property    | Type                           | Required | Default                             | Description |
-| ----------- | ------------------------------ | -------- | ----------------------------------- | ----------- |
-| includeHEAD | boolean                        | false    | false                               |             |
-| sortRoutes  | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) |             |
+| Property    | Type                           | Required | Default                             | Description                             |
+| ----------- | ------------------------------ | -------- | ----------------------------------- | --------------------------------------- |
+| includeHEAD | boolean                        | false    | false                               |                                         |
+| sortRoutes  | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) | by default, sorts routes alphabetically |
