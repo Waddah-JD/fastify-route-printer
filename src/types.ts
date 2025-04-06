@@ -4,9 +4,12 @@ export type FastifyRoutePrinterPluginOptions = {
   disabled?: boolean;
   includeHEAD?: boolean;
   sortRoutes?: (a: Route, b: Route) => number;
+  filterRoutes?: (r: Route) => boolean;
 };
 
-export type Config = Required<FastifyRoutePrinterPluginOptions>;
+export type Config = Required<Omit<FastifyRoutePrinterPluginOptions, "filterRoutes">> & {
+  filterRoutes: ((r: Route) => boolean) | null;
+};
 
 export type Route = {
   url: string;

@@ -7,6 +7,7 @@ class FastifyRoutePrinter {
     disabled: false,
     includeHEAD: false,
     sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
+    filterRoutes: null,
   };
   private readonly config: Config;
 
@@ -23,6 +24,7 @@ class FastifyRoutePrinter {
       disabled: pluginOptions.disabled || FastifyRoutePrinter.DEFAULT_CONFIG.disabled,
       includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
       sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
+      filterRoutes: pluginOptions.filterRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.filterRoutes,
     };
   }
 
@@ -40,9 +42,9 @@ class FastifyRoutePrinter {
       ? routes
       : routes.filter((it) => it.method !== "head" && it.method !== "HEAD");
 
-    // TODO add pluggable filter
+    const filtered = this.config.filterRoutes ? headFiltered.filter(this.config.filterRoutes) : headFiltered;
 
-    const sorted = headFiltered.sort(this.config.sortRoutes);
+    const sorted = filtered.sort(this.config.sortRoutes);
 
     return sorted;
   }
