@@ -40,3 +40,14 @@ await app.register(routePrinter, opts);
 | includeHEAD  | boolean                        | false    | false                               |                                                                                |
 | sortRoutes   | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) | by default, sorts routes alphabetically                                        |
 | filterRoutes | (r: Route) => boolean          | false    |                                     |
+| printer      | Printer                        | false    | TablePrinter                        |
+
+### Definitions
+
+Note: all types and interfaces are exported from this library, so you can just import and get the benefits of auto-complete and type intellisense
+
+```ts
+interface Printer {
+  print(routes: Route[]): Promise<string>;
+}
+```

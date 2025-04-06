@@ -2,7 +2,6 @@ import { FastifyPluginAsync, RouteOptions } from "fastify";
 import fastifyPlugin from "fastify-plugin";
 
 import FastifyRoutePrinter from "./FastifyRoutePrinter.js";
-import TablePrinter from "./printers/TablePrinter.js";
 import { Config, FastifyRoutePrinterPluginOptions, Printer, Route } from "./types.js";
 
 // eslint-disable-next-line func-style
@@ -16,8 +15,7 @@ const fastifyRoutePrinter: FastifyPluginAsync<FastifyRoutePrinterPluginOptions> 
   });
 
   instance.addHook("onReady", async () => {
-    const tablePrinter = new TablePrinter();
-    const frp = new FastifyRoutePrinter(routeOptions, tablePrinter, options);
+    const frp = new FastifyRoutePrinter(routeOptions, options);
     await frp.print();
   });
 };

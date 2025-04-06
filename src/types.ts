@@ -5,6 +5,7 @@ export type FastifyRoutePrinterPluginOptions = {
   includeHEAD?: boolean;
   sortRoutes?: (a: Route, b: Route) => number;
   filterRoutes?: (r: Route) => boolean;
+  printer?: Printer;
 };
 
 export type Config = Required<Omit<FastifyRoutePrinterPluginOptions, "filterRoutes">> & {
