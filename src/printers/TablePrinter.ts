@@ -5,7 +5,6 @@ class TablePrinter implements Printer {
     const lines: string[] = [];
 
     // TODO convert to generic utility?
-    // TODO add some unit tests
 
     const METHOD_COL_HEADER = "METHOD";
     const URL_COL_HEADER = "URL";
@@ -21,15 +20,17 @@ class TablePrinter implements Printer {
     const methodColLength = longestMethod + PADDING;
     const urlColLength = longestUrl + PADDING;
 
-    const layoutLine = `|${"-".repeat(methodColLength)}|${"-".repeat(urlColLength)}|`;
+    const topLine = `╔${"═".repeat(methodColLength)}╤${"═".repeat(urlColLength)}╗`;
+    const layoutLine = `║${"═".repeat(methodColLength)}|${"═".repeat(urlColLength)}║`;
+    const bottomLine = `╚${"═".repeat(methodColLength)}╧${"═".repeat(urlColLength)}╝`;
 
-    lines.push(layoutLine);
-    lines.push(`| ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}|`);
+    lines.push(topLine);
+    lines.push(`║ ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}║`);
     lines.push(layoutLine);
     for (const route of routes) {
-      lines.push(`| ${route.method.padEnd(methodColLength - 1)}| ${route.url.padEnd(urlColLength - 1)}|`);
+      lines.push(`║ ${route.method.padEnd(methodColLength - 1)}| ${route.url.padEnd(urlColLength - 1)}║`);
     }
-    lines.push(layoutLine);
+    lines.push(bottomLine);
 
     return lines.join("\n");
   }
