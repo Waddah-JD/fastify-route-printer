@@ -22,7 +22,11 @@
     "build:prod:watch": "npm run build:prod -- --watch",
     "publish:patch": "./bin/publish.sh patch",
     "publish:minor": "./bin/publish.sh minor",
-    "publish:major": "./bin/publish.sh major"
+    "publish:major": "./bin/publish.sh major",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "test:unit": "npm run test -- --testMatch \"$(pwd)/**/*.unit.test.ts\"",
+    "test:unit:watch": "npm run test:unit -- --watch"
   },
   "keywords": [
     "fastify",
@@ -30,6 +34,8 @@
     "routes"
   ],
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.14",
     "eslint": "^9.23.0",
     "eslint-import-resolver-typescript": "^4.3.1",
@@ -37,7 +43,9 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.0.0",
+    "jest": "^29.7.0",
     "prettier": "^3.5.3",
+    "ts-jest": "^29.3.1",
     "typescript": "^5.8.2"
   },
   "dependencies": {
