@@ -7,3 +7,6 @@ eslint.config.mjs
 prettier.config.mjs
 tsconfig.*
 TODO.md
+**/*/*.test.d.ts
+**/*/*.test.js
+**/*/*.test.js.map
