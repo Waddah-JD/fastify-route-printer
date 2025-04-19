@@ -10,6 +10,7 @@ class FastifyRoutePrinter {
     sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
     filterRoutes: null,
     printer: new TablePrinter(),
+    host: null,
   };
   private readonly config: Config;
 
@@ -27,6 +28,7 @@ class FastifyRoutePrinter {
       sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
       filterRoutes: pluginOptions.filterRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.filterRoutes,
       printer: pluginOptions.printer || FastifyRoutePrinter.DEFAULT_CONFIG.printer,
+      host: pluginOptions.host || FastifyRoutePrinter.DEFAULT_CONFIG.host,
     };
   }
 
@@ -37,7 +39,8 @@ class FastifyRoutePrinter {
     this.routeOptions.forEach((it) => {
       const methods: HTTPMethods[] = Array.isArray(it.method) ? it.method : [it.method];
       for (const method of methods) {
-        routes.push({ method, url: it.url });
+        const url = this.config.host ? `${this.config.host}${it.url}` : it.url;
+        routes.push({ method, url });
       }
     });
 
