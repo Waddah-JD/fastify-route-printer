@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.0] - 2025-04-19
+
+### Added
+
+- Option: `host` which includes the host as passed by user in the output of urls
+- `FastifyRoutePrinter` class unit tests
+
+### Removed
+
+- test and test-related files from published version
+
 ## [1.0.0] - 2025-04-12
 
 ### Added
