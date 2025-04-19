@@ -30,7 +30,8 @@ class FastifyRoutePrinter {
     };
   }
 
-  private getRoutesFromRouteOptions(): Route[] {
+  // exposed only for testing-purpose
+  public getRoutesFromRouteOptions(): Route[] {
     const routes: Route[] = [];
 
     this.routeOptions.forEach((it) => {
