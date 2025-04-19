@@ -58,7 +58,10 @@ class FastifyRoutePrinter {
 
   async print(): Promise<void> {
     const routes = this.getRoutesFromRouteOptions();
-    await this.config.printer.print(routes);
+    const output = await this.config.printer.print(routes);
+
+    // TODO add options: stdout or fs, for now to stdout by default
+    console.log(output);
   }
 }
 

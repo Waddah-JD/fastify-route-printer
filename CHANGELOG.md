@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2025-04-19
+
+### Fixed
+
+- printing issue
+
 ## [1.1.0] - 2025-04-19
 
 ### Added
