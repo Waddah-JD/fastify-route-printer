@@ -40,6 +40,7 @@ await app.register(routePrinter, opts);
 | includeHEAD  | boolean                        | false    | false                               |                                                                                |
 | sortRoutes   | (a: Route, b: Route) => number | false    | (a, b) => (a.url >= b.url ? 1 : -1) | by default, sorts routes alphabetically                                        |
 | filterRoutes | (r: Route) => boolean          | false    |                                     |
+| host         | string                         | false    |                                     | add host as a prefix in the output                                             |
 | printer      | Printer                        | false    | TablePrinter                        |
 
 ### Definitions
