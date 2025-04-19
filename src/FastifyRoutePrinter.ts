@@ -39,8 +39,9 @@ class FastifyRoutePrinter {
     this.routeOptions.forEach((it) => {
       const methods: HTTPMethods[] = Array.isArray(it.method) ? it.method : [it.method];
       for (const method of methods) {
-        const url = this.config.host ? `${this.config.host}${it.url}` : it.url;
-        routes.push({ method, url });
+        const prefix = this.config.host || "";
+        const sanitizedPrefix = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
+        routes.push({ method, url: `${sanitizedPrefix}${it.url}` });
       }
     });
 

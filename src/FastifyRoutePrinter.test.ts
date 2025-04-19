@@ -165,5 +165,30 @@ describe(FastifyRoutePrinter.name, function () {
       const actual = instance.getRoutesFromRouteOptions();
       expect(actual).toStrictEqual(expected);
     });
+
+    it("should properly prepend host if user passes a value with a trailing slash", function () {
+      const userOptions: FastifyRoutePrinterPluginOptions = {
+        host: "localhost:8080/",
+      };
+      const routeOptions: RouteOptions[] = [
+        { method: "GET", url: "/url-1" },
+        { method: "HEAD", url: "/url-1" },
+        { method: "POST", url: "/url-2" },
+        { method: "GET", url: "/url-2" },
+        { method: "POST", url: "/url-1" },
+        { method: "POST", url: "/url-3" },
+        { method: "HEAD", url: "/url-3" },
+      ] as RouteOptions[];
+      const instance = new FastifyRoutePrinter(routeOptions, userOptions);
+      const expected = [
+        { method: "GET", url: "localhost:8080/url-1" },
+        { method: "POST", url: "localhost:8080/url-1" },
+        { method: "POST", url: "localhost:8080/url-2" },
+        { method: "GET", url: "localhost:8080/url-2" },
+        { method: "POST", url: "localhost:8080/url-3" },
+      ];
+      const actual = instance.getRoutesFromRouteOptions();
+      expect(actual).toStrictEqual(expected);
+    });
   });
 });
