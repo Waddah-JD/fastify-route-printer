@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0] - 2025-04-20
+
+### Added
+
+- Option: `writer` a `Writer`-compatible class that handles the output functionality
+- new writer option: `ConsoleWriter`
+- new writer option: `FileWriter`
+
 ## [1.1.1] - 2025-04-19
 
 ### Fixed
