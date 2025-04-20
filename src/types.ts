@@ -5,8 +5,9 @@ export type FastifyRoutePrinterPluginOptions = {
   includeHEAD?: boolean;
   sortRoutes?: (a: Route, b: Route) => number;
   filterRoutes?: (r: Route) => boolean;
-  printer?: Printer;
   host?: string | null;
+  printer?: Printer;
+  writer?: Writer;
 };
 
 export type Config = Required<Omit<FastifyRoutePrinterPluginOptions, "filterRoutes">> & {
@@ -20,4 +21,8 @@ export type Route = {
 
 export interface Printer {
   print(routes: Route[]): Promise<string>;
+}
+
+export interface Writer {
+  write(buffer: Uint8Array): Promise<void>;
 }

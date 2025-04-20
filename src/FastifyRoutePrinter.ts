@@ -2,6 +2,7 @@ import { HTTPMethods, RouteOptions } from "fastify";
 
 import TablePrinter from "./printers/TablePrinter.js";
 import { Config, FastifyRoutePrinterPluginOptions, Route } from "./types.js";
+import ConsoleWriter from "./writers/ConsoleWriter.js";
 
 class FastifyRoutePrinter {
   private static DEFAULT_CONFIG: Config = {
@@ -9,8 +10,9 @@ class FastifyRoutePrinter {
     includeHEAD: false,
     sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
     filterRoutes: null,
-    printer: new TablePrinter(),
     host: null,
+    printer: new TablePrinter(),
+    writer: new ConsoleWriter(),
   };
   private readonly config: Config;
 
@@ -27,8 +29,9 @@ class FastifyRoutePrinter {
       includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
       sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
       filterRoutes: pluginOptions.filterRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.filterRoutes,
-      printer: pluginOptions.printer || FastifyRoutePrinter.DEFAULT_CONFIG.printer,
       host: pluginOptions.host || FastifyRoutePrinter.DEFAULT_CONFIG.host,
+      printer: pluginOptions.printer || FastifyRoutePrinter.DEFAULT_CONFIG.printer,
+      writer: pluginOptions.writer || FastifyRoutePrinter.DEFAULT_CONFIG.writer,
     };
   }
 
@@ -59,9 +62,8 @@ class FastifyRoutePrinter {
   async print(): Promise<void> {
     const routes = this.getRoutesFromRouteOptions();
     const output = await this.config.printer.print(routes);
-
-    // TODO add options: stdout or fs, for now to stdout by default
-    console.log(output);
+    const buffer = Buffer.from(output);
+    await this.config.writer.write(buffer);
   }
 }
 
