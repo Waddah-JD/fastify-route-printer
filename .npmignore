@@ -10,3 +10,4 @@ TODO.md
 **/*/*.test.d.ts
 **/*/*.test.js
 **/*/*.test.js.map
+jest.config.js
