@@ -1,6 +1,18 @@
-import { Printer, Route } from "../types.js";
+import { COLOR_VALUES_MAP, DEFAULT_COLOR_SCHEME } from "../constants.js";
+import { ColorScheme, Printer, Route } from "../types.js";
 
 class TablePrinter implements Printer {
+  private readonly colorScheme: ColorScheme | null;
+
+  constructor(options: { colors: ColorScheme | boolean }) {
+    if (!options.colors) {
+      this.colorScheme = null;
+      return;
+    }
+
+    this.colorScheme = typeof options.colors === "boolean" ? DEFAULT_COLOR_SCHEME : options.colors;
+  }
+
   async print(routes: Route[]): Promise<string> {
     const lines: string[] = [];
 
@@ -28,11 +40,17 @@ class TablePrinter implements Printer {
     lines.push(`║ ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}║`);
     lines.push(layoutLine);
     for (const route of routes) {
-      lines.push(`║ ${route.method.padEnd(methodColLength - 1)}| ${route.url.padEnd(urlColLength - 1)}║`);
+      lines.push(`║ ${this.printMethod(route.method, methodColLength)}| ${route.url.padEnd(urlColLength - 1)}║`);
     }
     lines.push(bottomLine);
 
     return lines.join("\n");
+  }
+
+  private printMethod(routeMethod: string, methodColLength: number): string {
+    const method = routeMethod.padEnd(methodColLength - 1);
+    if (!this.colorScheme) return method;
+    return `${COLOR_VALUES_MAP[this.colorScheme[routeMethod]]}${method}${COLOR_VALUES_MAP.NO_COLOR}`;
   }
 }
 

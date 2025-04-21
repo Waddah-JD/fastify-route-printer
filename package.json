@@ -1,7 +1,7 @@
 {
   "name": "fastify-route-printer",
   "version": "1.2.0",
-  "description": "Fastify route printer",
+  "description": "Light-Weight, Fully Customizable and Extensible Fastify Route Printer",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

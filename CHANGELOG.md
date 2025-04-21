@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] - 2025-04-21
+
+### Added
+
+- Option: `colors` which defines whether to enable or disable default colors or use custom color schemes
+
 ## [1.2.0] - 2025-04-20
 
 ### Added

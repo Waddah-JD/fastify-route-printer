@@ -5,15 +5,6 @@ import { Config, FastifyRoutePrinterPluginOptions, Route } from "./types.js";
 import ConsoleWriter from "./writers/ConsoleWriter.js";
 
 class FastifyRoutePrinter {
-  private static DEFAULT_CONFIG: Config = {
-    disabled: false,
-    includeHEAD: false,
-    sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
-    filterRoutes: null,
-    host: null,
-    printer: new TablePrinter(),
-    writer: new ConsoleWriter(),
-  };
   private readonly config: Config;
 
   constructor(
@@ -24,14 +15,24 @@ class FastifyRoutePrinter {
   }
 
   private static getConfig(pluginOptions: FastifyRoutePrinterPluginOptions): Config {
+    const DEFAULT_CONFIG: Config = {
+      disabled: false,
+      includeHEAD: false,
+      sortRoutes: (a, b) => (a.url >= b.url ? 1 : -1),
+      filterRoutes: null,
+      host: null,
+      printer: new TablePrinter({ colors: pluginOptions.colors || false }),
+      writer: new ConsoleWriter(),
+    };
+
     return {
-      disabled: pluginOptions.disabled || FastifyRoutePrinter.DEFAULT_CONFIG.disabled,
-      includeHEAD: pluginOptions.includeHEAD || FastifyRoutePrinter.DEFAULT_CONFIG.includeHEAD,
-      sortRoutes: pluginOptions.sortRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.sortRoutes,
-      filterRoutes: pluginOptions.filterRoutes || FastifyRoutePrinter.DEFAULT_CONFIG.filterRoutes,
-      host: pluginOptions.host || FastifyRoutePrinter.DEFAULT_CONFIG.host,
-      printer: pluginOptions.printer || FastifyRoutePrinter.DEFAULT_CONFIG.printer,
-      writer: pluginOptions.writer || FastifyRoutePrinter.DEFAULT_CONFIG.writer,
+      disabled: pluginOptions.disabled || DEFAULT_CONFIG.disabled,
+      includeHEAD: pluginOptions.includeHEAD || DEFAULT_CONFIG.includeHEAD,
+      sortRoutes: pluginOptions.sortRoutes || DEFAULT_CONFIG.sortRoutes,
+      filterRoutes: pluginOptions.filterRoutes || DEFAULT_CONFIG.filterRoutes,
+      host: pluginOptions.host || DEFAULT_CONFIG.host,
+      printer: pluginOptions.printer || DEFAULT_CONFIG.printer,
+      writer: pluginOptions.writer || DEFAULT_CONFIG.writer,
     };
   }
 
