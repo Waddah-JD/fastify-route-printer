@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0] - 2025-04-27
+
+### Added
+
+- new printer option: `JSONPrinter`
+- warning for using colored output while not using `ConsoleWriter`
+- util to check path existense (for file writer), and create it if doesn't exist
+
 ## [1.3.0] - 2025-04-21
 
 ### Added
