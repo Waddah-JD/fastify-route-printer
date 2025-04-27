@@ -14,6 +14,14 @@ class FastifyRoutePrinter {
     this.config = FastifyRoutePrinter.getConfig(pluginOptions);
   }
 
+  private static validateConfig(config: Config, colors: FastifyRoutePrinterPluginOptions["colors"]): void {
+    if (colors && !(config.writer instanceof ConsoleWriter)) {
+      console.warn(
+        "fastify-route-printer:\noption: 'colors' can be enabled only while 'writer' is 'ConsoleWriter', this will lead to unexpected behavior",
+      );
+    }
+  }
+
   private static getConfig(pluginOptions: FastifyRoutePrinterPluginOptions): Config {
     const DEFAULT_CONFIG: Config = {
       disabled: false,
@@ -25,7 +33,7 @@ class FastifyRoutePrinter {
       writer: new ConsoleWriter(),
     };
 
-    return {
+    const config = {
       disabled: pluginOptions.disabled || DEFAULT_CONFIG.disabled,
       includeHEAD: pluginOptions.includeHEAD || DEFAULT_CONFIG.includeHEAD,
       sortRoutes: pluginOptions.sortRoutes || DEFAULT_CONFIG.sortRoutes,
@@ -34,6 +42,10 @@ class FastifyRoutePrinter {
       printer: pluginOptions.printer || DEFAULT_CONFIG.printer,
       writer: pluginOptions.writer || DEFAULT_CONFIG.writer,
     };
+
+    this.validateConfig(config, pluginOptions.colors);
+
+    return config;
   }
 
   // exposed only for testing-purpose
