@@ -2,6 +2,7 @@ import { FastifyPluginAsync, RouteOptions } from "fastify";
 import fastifyPlugin from "fastify-plugin";
 
 import FastifyRoutePrinter from "./FastifyRoutePrinter.js";
+import JSONPrinter from "./printers/JSONPrinter.js";
 import TablePrinter from "./printers/TablePrinter.js";
 import { Color, ColorScheme, ColorValue, FastifyRoutePrinterPluginOptions, Printer, Route } from "./types.js";
 import ConsoleWriter from "./writers/ConsoleWriter.js";
@@ -32,6 +33,7 @@ export {
   ConsoleWriter,
   FastifyRoutePrinterPluginOptions,
   FileWriter,
+  JSONPrinter,
   Printer,
   Route,
   TablePrinter,

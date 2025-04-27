@@ -7,6 +7,7 @@ Light-Weight, Fully Customizable and Extensible Fastify Route Printer
 - No configuration needed
 - Fully Customizable
 - Multiple out-of-the-box "write" options: stdout, file
+- Multiple out-of-the-box "print" options: table, json
 - Plug-and-play, if the provided "print" and "write" options are not what you are looking for, write your own custom `Printer` and/or `Writer`, you only need to adhere to the interfaces (check below for details), the rest is fully up to you.
 - Light-Weight
 - No bloat, only one run-time dependency
@@ -65,6 +66,7 @@ import fastifyRoutePrinterPlugin, {
   ConsoleWriter,
   FastifyRoutePrinterPluginOptions,
   FileWriter,
+  JSONPrinter,
   Printer,
   Route,
   TablePrinter,
