@@ -1,14 +1,14 @@
-import { HTTPMethods, RouteOptions } from "fastify";
+import { HTTPMethods } from "fastify";
 
 import TablePrinter from "./printers/TablePrinter.js";
-import { Config, FastifyRoutePrinterPluginOptions, Route } from "./types.js";
+import { Config, CustomRouteOption, FastifyRoutePrinterPluginOptions, Route } from "./types.js";
 import ConsoleWriter from "./writers/ConsoleWriter.js";
 
 class FastifyRoutePrinter {
   private readonly config: Config;
 
   constructor(
-    private readonly routeOptions: RouteOptions[],
+    private readonly routeOptions: CustomRouteOption[],
     pluginOptions: FastifyRoutePrinterPluginOptions,
   ) {
     this.config = FastifyRoutePrinter.getConfig(pluginOptions);
@@ -57,7 +57,9 @@ class FastifyRoutePrinter {
       for (const method of methods) {
         const prefix = this.config.host || "";
         const sanitizedPrefix = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
-        routes.push({ method, url: `${sanitizedPrefix}${it.url}` });
+        const route: Route = { method, url: `${sanitizedPrefix}${it.url}` };
+        if (it.description) route.description = it.description;
+        routes.push(route);
       }
     });
 
