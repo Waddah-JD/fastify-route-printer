@@ -57,5 +57,42 @@ describe(TablePrinter.name, function () {
     });
   });
 
+  describe("with description", function () {
+    const instance = new TablePrinter({ colors: false });
+
+    describe(TablePrinter.prototype.print.name, function () {
+      it("should print table even if routes are empty", async function () {
+        const table = await instance.print([]);
+        const expected = `╔════════╤═════╗\n║ METHOD | URL ║\n║════════|═════║\n╚════════╧═════╝`;
+        expect(table).toBe(expected);
+      });
+
+      it("should print a table with 'description' if the only route has 'description' value", async function () {
+        const table = await instance.print([{ method: "GET", url: "/employees" }]);
+        const expected = `╔════════╤════════════╗\n║ METHOD | URL        ║\n║════════|════════════║\n║ GET    | /employees ║\n╚════════╧════════════╝`;
+        expect(table).toBe(expected);
+      });
+
+      it("should print a table with 'description' if at least one route has 'description' value", async function () {
+        const table = await instance.print([
+          { method: "GET", url: "/employees" },
+          { method: "GET", url: "/employees/:id", description: "get employee by ID" },
+          { method: "PATCH", url: "/employees/:id" },
+        ]);
+        const expected = `╔════════╤════════════════╤════════════════════╗\n║ METHOD | URL            | DESCRIPTION        ║\n║════════|════════════════|════════════════════║\n║ GET    | /employees     |                    ║\n║ GET    | /employees/:id | get employee by ID ║\n║ PATCH  | /employees/:id |                    ║\n╚════════╧════════════════╧════════════════════╝`;
+        expect(table).toBe(expected);
+      });
+
+      it("should print a table without 'description' if no routes has 'description' value", async function () {
+        const table = await instance.print([
+          { method: "GET", url: "/employees" },
+          { method: "GET", url: "/employees/:id" },
+          { method: "PATCH", url: "/employees/:id" },
+        ]);
+        const expected = `╔════════╤════════════════╗\n║ METHOD | URL            ║\n║════════|════════════════║\n║ GET    | /employees     ║\n║ GET    | /employees/:id ║\n║ PATCH  | /employees/:id ║\n╚════════╧════════════════╝`;
+        expect(table).toBe(expected);
+      });
+    });
+  });
   // TODO add a test case with custom color scheme
 });

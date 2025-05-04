@@ -16,31 +16,55 @@ class TablePrinter implements Printer {
   async print(routes: Route[]): Promise<string> {
     const lines: string[] = [];
 
+    const atLeastOneDescription = routes.some((it) => it.description);
+
     // TODO convert to generic utility?
 
     const METHOD_COL_HEADER = "METHOD";
     const URL_COL_HEADER = "URL";
+    const DESCRIPTION_COL_HEADER = "DESCRIPTION";
+
     let longestMethod = METHOD_COL_HEADER.length;
     let longestUrl = URL_COL_HEADER.length;
+    let longestDescription = DESCRIPTION_COL_HEADER.length;
+
     const PADDING = 2;
 
     for (const r of routes) {
       longestMethod = Math.max(r.method.length, longestMethod);
       longestUrl = Math.max(r.url.length, longestUrl);
+      longestDescription = Math.max(r.description?.length || 0, longestDescription);
     }
 
     const methodColLength = longestMethod + PADDING;
     const urlColLength = longestUrl + PADDING;
+    const descriptionColLength = longestDescription + PADDING;
 
-    const topLine = `╔${"═".repeat(methodColLength)}╤${"═".repeat(urlColLength)}╗`;
-    const layoutLine = `║${"═".repeat(methodColLength)}|${"═".repeat(urlColLength)}║`;
-    const bottomLine = `╚${"═".repeat(methodColLength)}╧${"═".repeat(urlColLength)}╝`;
+    let topLine = `╔${"═".repeat(methodColLength)}╤${"═".repeat(urlColLength)}`;
+    if (atLeastOneDescription) topLine += `╤${"═".repeat(descriptionColLength)}`;
+    topLine += `╗`;
+
+    let layoutLine = `║${"═".repeat(methodColLength)}|${"═".repeat(urlColLength)}`;
+    if (atLeastOneDescription) layoutLine += `|${"═".repeat(descriptionColLength)}`;
+    layoutLine += `║`;
+
+    let bottomLine = `╚${"═".repeat(methodColLength)}╧${"═".repeat(urlColLength)}`;
+    if (atLeastOneDescription) bottomLine += `╧${"═".repeat(descriptionColLength)}`;
+    bottomLine += `╝`;
 
     lines.push(topLine);
-    lines.push(`║ ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}║`);
+
+    let HEADER_ROW = `║ ${METHOD_COL_HEADER.padEnd(methodColLength - 1)}| ${URL_COL_HEADER.padEnd(urlColLength - 1)}`;
+    if (atLeastOneDescription) HEADER_ROW += `| ${DESCRIPTION_COL_HEADER.padEnd(descriptionColLength - 1)}`;
+    HEADER_ROW += `║`;
+    lines.push(HEADER_ROW);
+
     lines.push(layoutLine);
     for (const route of routes) {
-      lines.push(`║ ${this.printMethod(route.method, methodColLength)}| ${route.url.padEnd(urlColLength - 1)}║`);
+      let row = `║ ${this.printMethod(route.method, methodColLength)}| ${route.url.padEnd(urlColLength - 1)}`;
+      if (atLeastOneDescription) row += `| ${(route.description || "").padEnd(descriptionColLength - 1)}`;
+      row += `║`;
+      lines.push(row);
     }
     lines.push(bottomLine);
 
