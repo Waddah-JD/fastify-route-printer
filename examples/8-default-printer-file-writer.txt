@@ -1,0 +1,14 @@
+╔═════════╤════════════════╤═════════════════════════════════════════════════════╗
+║ METHOD  | URL            | DESCRIPTION                                         ║
+║═════════|════════════════|═════════════════════════════════════════════════════║
+║ GET     | /              | bla bla..                                           ║
+║ POST    | /              |                                                     ║
+║ PATCH   | /              |                                                     ║
+║ PUT     | /              | a longer description, just to see how it looks like ║
+║ DELETE  | /              |                                                     ║
+║ OPTIONS | /              |                                                     ║
+║ GET     | /auth          |                                                     ║
+║ GET     | /employees     |                                                     ║
+║ GET     | /employees/:id |                                                     ║
+║ GET     | /ping          | ping endpoint                                       ║
+╚═════════╧════════════════╧═════════════════════════════════════════════════════╝

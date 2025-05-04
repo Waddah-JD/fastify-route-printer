@@ -1,0 +1,45 @@
+[
+  {
+    "method": "GET",
+    "url": "/",
+    "description": "bla bla.."
+  },
+  {
+    "method": "POST",
+    "url": "/"
+  },
+  {
+    "method": "PATCH",
+    "url": "/"
+  },
+  {
+    "method": "PUT",
+    "url": "/",
+    "description": "a longer description, just to see how it looks like"
+  },
+  {
+    "method": "DELETE",
+    "url": "/"
+  },
+  {
+    "method": "OPTIONS",
+    "url": "/"
+  },
+  {
+    "method": "GET",
+    "url": "/auth"
+  },
+  {
+    "method": "GET",
+    "url": "/employees"
+  },
+  {
+    "method": "GET",
+    "url": "/employees/:id"
+  },
+  {
+    "method": "GET",
+    "url": "/ping",
+    "description": "ping endpoint"
+  }
+]

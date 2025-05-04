@@ -11,3 +11,4 @@ TODO.md
 **/*/*.test.js
 **/*/*.test.js.map
 jest.config.js
+examples
