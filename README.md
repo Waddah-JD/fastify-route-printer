@@ -37,6 +37,27 @@ const opts: FastifyRoutePrinterPluginOptions = {
 await app.register(routePrinter, opts);
 ```
 
+#### Route definitions
+
+```ts
+app
+  .get("/with-description", { config: { routePrinter: { description: "..." } } }, async function (request, reply) {})
+  .get("/without-description", async function (request, reply) {});
+
+// or
+app.route({
+  url: "/with-description",
+  method: "get",
+  config: { routePrinter: { description: "..." } },
+  handler: async function (request, reply) {},
+});
+app.route({
+  url: "/without-description",
+  method: "get",
+  handler: async function (request, reply) {},
+});
+```
+
 ## Documentation
 
 ### FastifyRoutePrinterPluginOptions
